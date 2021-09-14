@@ -6,4 +6,10 @@
     <string name="logout">Logout</string>
     <string name="register">Register</string>
     <string name="registered_click_here_to_login">Registered? <b>Click Here</b> to login</string>
+    <string name="search">Search</string>
+    <string name="other">Others</string>
+<!--    Don't change or  modify these two-->
+    <string name="nav_drawer_open">Open navigation drawer</string>
+    <string name="nav_drawer_close">Close navigation drawer</string>
+    <!--===***===-->
 </resources>

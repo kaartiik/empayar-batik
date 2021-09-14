@@ -1,4 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    
+    <item android:id="@+id/navDrawer_newArrivals"
+        android:title="New Arrivals"/>
+
+    <item android:id="@+id/navDrawer_collections"
+        android:title="Collections"/>
+
+    <item android:id="@+id/navDrawer_top"
+        android:title="Top"/>
+
+    <item android:id="@+id/navDrawer_pants"
+        android:title="Pants"/>
+
+    <item android:id="@+id/navDrawer_dress"
+        android:title="Dress"/>
+
+    <item android:title="@string/other">
+        <menu>
+            <item android:title="Shopping Cart"
+                android:id="@+id/navDrawer_shoppingCart"
+                android:icon="@drawable/ic_baseline_shopping_cart_24"
+                />
+        </menu>
+    </item>
+
 </menu>
