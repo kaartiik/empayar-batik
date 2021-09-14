@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "950105109788",
+    "project_id": "empayar-batik",
+    "storage_bucket": "empayar-batik.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:950105109788:android:a90025570da78986e3f6d9",
+        "android_client_info": {
+          "package_name": "com.kaartiikvjn.empayarbatik"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "950105109788-5g1ict2o34pf7as2cum0a0e91dl8cj6j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_TLO5EwV2FwKg5YsHsAwq6QADDpgRIY8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "950105109788-5g1ict2o34pf7as2cum0a0e91dl8cj6j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
