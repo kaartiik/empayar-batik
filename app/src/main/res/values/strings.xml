@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Empayar Batik</string>
+    <string name="please_wait">Please wait...</string>
+    <string name="login">Login</string>
+    <string name="not_registered_click_here_to_register">Not registered? <b>Click Here</b> to register</string>
+    <string name="logout">Logout</string>
+    <string name="register">Register</string>
+    <string name="registered_click_here_to_login">Registered? <b>Click Here</b> to login</string>
 </resources>
