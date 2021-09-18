@@ -1,11 +1,17 @@
 package com.kaartiikvjn.empayarbatik.UI;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.ImageDecoder;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -14,10 +20,14 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.storage.UploadTask;
 import com.kaartiikvjn.empayarbatik.R;
 import com.kaartiikvjn.empayarbatik.databinding.ActivityAddItemBinding;
 import com.kaartiikvjn.empayarbatik.utils.BaseActivity;
+import com.kaartiikvjn.empayarbatik.utils.Constants;
 
+import java.io.ByteArrayOutputStream;
+import java.util.HashMap;
 import java.util.Objects;
 
 public class AddItem extends BaseActivity {
@@ -43,6 +53,80 @@ public class AddItem extends BaseActivity {
         binding.addItemImagePicker.setOnClickListener(v -> {
             pickImage();
         });
+        spinnerSetter();
+        binding.buttonAddItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showProgressDialog("Adding Item.......");
+                if (imageUri == null) {
+                    toast("Please select an item image");
+                } else if (binding.addItemTitle.getText().toString().isEmpty()) {
+                    binding.addItemTitle.requestFocus();
+                    binding.addItemTitle.setError("Item title is required.");
+                } else if (binding.addItemPrice.getText().toString().isEmpty()) {
+                    binding.addItemPrice.requestFocus();
+                    binding.addItemPrice.setError("Item Price is required.");
+                } else if (binding.addItemTraits.getText().toString().isEmpty()) {
+                    binding.addItemTraits.requestFocus();
+                    binding.addItemTraits.setError("At least one special trait is required.");
+                } else if (binding.addItemMaterial.getText().toString().isEmpty()) {
+                    binding.addItemMaterial.requestFocus();
+                    binding.addItemMaterial.setError("Please specify the item material");
+                } else {
+                    String itemKey = getDatabaseReference().child(Constants.items).push().getKey();
+                    Bitmap bitmap = null;
+                    ContentResolver contentResolver = getContentResolver();
+                    try {
+                        if (Build.VERSION.SDK_INT < 28) {
+                            bitmap = MediaStore.Images.Media.getBitmap(contentResolver, imageUri);
+                        } else {
+                            ImageDecoder.Source source = ImageDecoder.createSource(contentResolver, imageUri);
+                            bitmap = ImageDecoder.decodeBitmap(source);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    assert (bitmap != null);
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                    byte[] data = baos.toByteArray();
+                    String imageName = getImageName();
+                    UploadTask uploadTask =
+                            getStorageReference().child(imageName)
+                                    .putBytes(data);
+                    uploadTask.addOnSuccessListener(taskSnapshot -> {
+                        HashMap<String, String> itemData = new HashMap<>();
+                        itemData.put(Constants.itemPhotoUrl,"ItemImages/"+imageName);
+                        itemData.put(Constants.itemTitle, binding.addItemTitle.getText().toString());
+                        itemData.put(Constants.itemPrice, binding.addItemPrice.getText().toString());
+                        itemData.put(Constants.itemSize, binding.addItemPrice.getText().toString());
+                        itemData.put(Constants.itemSpecialTraits, binding.addItemTraits.getText().toString());
+                        itemData.put(Constants.itemMaterial, binding.addItemMaterial.getText().toString());
+                        itemData.put(Constants.itemCategory, binding.categorySpinner.getText().toString());
+                        getDatabaseReference().child(Constants.items).child(itemKey).setValue(itemData).addOnSuccessListener(unused -> {
+                            hideProgressDialog();
+                            toast("Item successfully added");
+                            clearForm();
+                        });
+                    });
+                }
+            }
+        });
+    }
+
+    private void clearForm() {
+        binding.addItemImageView.setImageResource(android.R.color.transparent);
+        binding.addItemTitle.setText("");
+        binding.addItemPrice.setText("");
+        binding.sizeSpinner.setSelectedIndex(0);
+        binding.categorySpinner.setSelectedIndex(0);
+        binding.addItemTraits.setText("");
+        binding.addItemMaterial.setText("");
+    }
+
+    private void spinnerSetter() {
+        binding.sizeSpinner.setItems("XS", "S", "M", "L", "XL", "XXL");
+        binding.categorySpinner.setItems(Constants.newArrivals, Constants.top, Constants.dress, Constants.pants);
     }
 
     private void pickImage() {
@@ -70,7 +154,12 @@ public class AddItem extends BaseActivity {
                     })
                     .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss()).show();
             return true;
-        } else
+        } else if (item.getItemId() == R.id.add_item_clearForm)
+        {
+            clearForm();
+            return true;
+        }
+        else
             return super.onOptionsItemSelected(item);
     }
 

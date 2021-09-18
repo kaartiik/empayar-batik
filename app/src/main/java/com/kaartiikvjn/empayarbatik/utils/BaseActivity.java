@@ -3,7 +3,10 @@ package com.kaartiikvjn.empayarbatik.utils;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.OpenableColumns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -17,7 +20,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.kaartiikvjn.empayarbatik.R;
+
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 
 public class BaseActivity extends AppCompatActivity {
@@ -27,7 +35,7 @@ public class BaseActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private CollectionReference usersReference;
     private DatabaseReference databaseReference;
-
+    private StorageReference storageReference;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +44,7 @@ public class BaseActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         usersReference = FirebaseFirestore.getInstance().collection(Constants.users);
         databaseReference = FirebaseDatabase.getInstance().getReference();
+        storageReference = FirebaseStorage.getInstance().getReference().child("ItemImages");
         dialog.requestWindowFeature(android.view.Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         dialogView = LayoutInflater.from(this).inflate(R.layout.layout_progress_dialog, null);
@@ -47,6 +56,10 @@ public class BaseActivity extends AppCompatActivity {
         TextView messageTextView = dialogView.findViewById(R.id.progress_dialog_message);
         messageTextView.setText(message);
         dialog.show();
+    }
+
+    public String getImageName() {
+        return "image_" + new SimpleDateFormat("ddMMyyyyhhmmss", Locale.getDefault()).format(System.currentTimeMillis());
     }
 
     public void setDialogMessage(String message) {
@@ -112,5 +125,9 @@ public class BaseActivity extends AppCompatActivity {
 
     public DatabaseReference getDatabaseReference() {
         return databaseReference;
+    }
+
+    public StorageReference getStorageReference() {
+        return storageReference;
     }
 }

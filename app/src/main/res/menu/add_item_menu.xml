@@ -6,4 +6,9 @@
         android:title="@string/logout"
         app:showAsAction="never"
         />
+    <item
+        android:id="@+id/add_item_clearForm"
+        android:title="@string/clear_form"
+        app:showAsAction="never"
+        />
 </menu>
