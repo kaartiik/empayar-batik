@@ -105,23 +105,57 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/edit_text_bg"
-                android:paddingHorizontal="5dp"
-                android:paddingVertical="10dp">
-
-                <com.jaredrummler.materialspinner.MaterialSpinner
-                    android:id="@+id/sizeSpinner"
-                    android:layout_width="match_parent"
+                android:padding="5dp"
+                android:orientation="horizontal">
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/xs_checkbox"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    app:ms_arrow_tint="@color/colorPrimary"
-                    app:ms_background_color="@color/colorEditTextBg" />
-
-            </RelativeLayout>
+                    android:text="@string/xs"
+                    />
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/s_checkbox"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/s"
+                    />
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/m_checkbox"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/m"
+                    />
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/l_checkbox"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/l"
+                    />
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/xl_checkbox"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/xl"
+                    />
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/xll_checkbox"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/xll"
+                    />
+            </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -162,8 +196,8 @@
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="5dp"
                 android:background="@drawable/edit_text_bg"
-                android:hint="Special traits.."
-                android:inputType="numberDecimal"
+                android:hint="Material...."
+                android:inputType="text"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="15dp" />
 
