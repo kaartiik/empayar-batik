@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -53,9 +52,7 @@ public class AddItem extends BaseActivity {
                         Glide.with(this).load(imageUri).into(binding.addItemImageView);
                     }
                 });
-        binding.addItemImagePicker.setOnClickListener(v -> {
-            pickImage();
-        });
+        binding.addItemImagePicker.setOnClickListener(v -> pickImage());
         binding.xsCheckbox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 sizes.add(getString(R.string.xs));
@@ -141,11 +138,12 @@ public class AddItem extends BaseActivity {
                     HashMap<String, Object> itemData = new HashMap<>();
                     itemData.put(Constants.itemPhotoUrl, "ItemImages/" + imageName);
                     itemData.put(Constants.itemTitle, binding.addItemTitle.getText().toString());
-                    itemData.put(Constants.itemPrice, binding.addItemPrice.getText().toString());
+                    itemData.put(Constants.itemPrice, Double.parseDouble(binding.addItemPrice.getText().toString()));
                     itemData.put(Constants.itemSize, sizes);
                     itemData.put(Constants.itemSpecialTraits, binding.addItemTraits.getText().toString());
                     itemData.put(Constants.itemMaterial, binding.addItemMaterial.getText().toString());
                     itemData.put(Constants.itemCategory, binding.categorySpinner.getText().toString());
+                    assert itemKey != null;
                     getDatabaseReference().child(Constants.items).child(itemKey).setValue(itemData).addOnSuccessListener(unused -> {
                         hideProgressDialog();
                         toast("Item successfully added");

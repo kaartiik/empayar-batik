@@ -12,4 +12,8 @@
     <color name="colorTextPrimary">#222222</color>
     <color name="colorTextSecondary">#555555</color>
     <color name="colorDivider">#888888</color>
+    <color name="colorCartLight">#f5e8db</color>
+    <color name="colorCartDark">#ebd5b8</color>
+    <color name="colorCartText">#8e7a47</color>
+    <color name="colorOrderCompleted">#2e7d32</color>
 </resources>

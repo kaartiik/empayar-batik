@@ -40,6 +40,9 @@ public class LoginActivity extends BaseActivity {
                     if (getPreferenceString(Constants.userEmail).equals(Constants.adminMail)){
                         startActivity(new Intent(LoginActivity.this, AddItem.class));
                         finish();
+                    }else{
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        finish();
                     }
                 }).addOnFailureListener(e -> {
                     hideProgressDialog();

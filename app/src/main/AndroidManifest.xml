@@ -10,6 +10,30 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EmpayarBatik">
         <activity
+            android:name=".UI.collection.Tropicana"
+            android:exported="true" />
+        <activity
+            android:name=".UI.collection.Senada"
+            android:exported="true" />
+        <activity
+            android:name=".UI.collection.CalmSea"
+            android:exported="true" />
+        <activity
+            android:name=".UI.ItemDetails"
+            android:exported="true" />
+        <activity
+            android:name=".UI.OrderCompleted"
+            android:exported="true" />
+        <activity
+            android:name=".UI.PaymentBrandSelector"
+            android:exported="true" />
+        <activity
+            android:name=".UI.PaymentPage"
+            android:exported="true" />
+        <activity
+            android:name=".UI.ShoppingCartActivity"
+            android:exported="true" />
+        <activity
             android:name=".UI.RegisterScreen"
             android:exported="true" />
         <activity

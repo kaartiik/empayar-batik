@@ -8,7 +8,7 @@
     <string name="registered_click_here_to_login">Registered? <b>Click Here</b> to login</string>
     <string name="search">Search</string>
     <string name="other">Others</string>
-<!--    Don't change or  modify these two-->
+    <!--    Don't change or  modify these two-->
     <string name="nav_drawer_open">Open navigation drawer</string>
     <string name="nav_drawer_close">Close navigation drawer</string>
     <string name="clear_form">Clear Form</string>
@@ -18,5 +18,12 @@
     <string name="l">L</string>
     <string name="xl">XL</string>
     <string name="xll">XXL</string>
+    <string name="online_payment">Online payment</string>
+    <string name="online">Online</string>
+    <string name="payment">payment</string>
+    <string name="congratulations_submitted">Congratulations! Your order was successfully submitted. You will shortly recieve an SMS or Email. Our Customer servce might contact you to confirm your order.</string>
+    <string name="add_to_cart">Add to cart</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <!--===***===-->
 </resources>

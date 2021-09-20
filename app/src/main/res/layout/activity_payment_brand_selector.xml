@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.PaymentBrandSelector">
+
+    <include
+        android:id="@+id/toolbar_payment_brand_page"
+        layout="@layout/layout_toolbar" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_payment_brand_page">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <GridLayout
+                android:id="@+id/grid_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/grid_bg"
+                android:columnCount="4"
+                android:useDefaultMargins="true">
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:layout_gravity="end"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_baseline_arrow_drop_down_24"
+                    app:tint="@color/colorTextPrimary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="1"
+                    android:layout_gravity="end"
+                    android:text="@string/online"
+                    android:textColor="@color/colorTextPrimary"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="2"
+                    android:layout_gravity="start"
+                    android:text="@string/payment"
+                    android:textColor="@color/colorTextPrimary"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_row="1"
+                    android:layout_column="0"
+                    android:src="@drawable/a" />
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_row="1"
+                    android:layout_column="1"
+                    android:src="@drawable/a1" />
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_row="1"
+                    android:layout_column="2"
+                    android:src="@drawable/a2" />
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_row="1"
+                    android:layout_column="3"
+                    android:src="@drawable/d" />
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_row="2"
+                    android:layout_column="0"
+                    android:src="@drawable/e" />
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_row="2"
+                    android:layout_column="1"
+                    android:src="@drawable/f" />
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_row="2"
+                    android:layout_column="2"
+                    android:src="@drawable/g" />
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_row="2"
+                    android:layout_column="3"
+                    android:src="@drawable/h" />
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_row="3"
+                    android:layout_column="0"
+                    android:src="@drawable/i" />
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_row="3"
+                    android:layout_column="0"
+                    android:src="@drawable/i" />
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_row="3"
+                    android:layout_column="1"
+                    android:src="@drawable/j" />
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_row="3"
+                    android:layout_column="2"
+                    android:src="@drawable/k" />
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_row="3"
+                    android:layout_column="3"
+                    android:src="@drawable/l" />
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_row="4"
+                    android:layout_column="0"
+                    android:src="@drawable/m" />
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_row="4"
+                    android:layout_column="1"
+                    android:src="@drawable/n" />
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_row="4"
+                    android:layout_column="2"
+                    android:src="@drawable/o" />
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_row="4"
+                    android:layout_column="3"
+                    android:src="@drawable/p" />
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_row="5"
+                    android:layout_column="0"
+                    android:src="@drawable/q" />
+
+            </GridLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingHorizontal="20dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_text_bg"
+                    android:padding="10dp"
+                    android:textAllCaps="true"
+                    android:text="Amount to pay"
+                    android:textStyle="bold"
+                    android:layout_marginEnd="20dp"
+                    android:textColor="@color/colorTextPrimary"
+                    android:textSize="18sp" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/grid_bg"
+                    android:padding="10dp"
+                    android:text="RM 400.0"
+                    android:textColor="@color/colorTextPrimary"
+                    android:textSize="18sp" />
+            </LinearLayout>
+            <Button
+                android:id="@+id/proceed"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#ce93d8"
+                android:layout_gravity="start"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="10dp"
+                android:text="Proceed"/>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

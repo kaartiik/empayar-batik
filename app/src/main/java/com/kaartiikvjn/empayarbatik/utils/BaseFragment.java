@@ -56,7 +56,7 @@ public class BaseFragment extends Fragment {
     }
 
     public void hideProgressDialog() {
-        if (dialog.isShowing() && dialog == null) {
+        if (dialog.isShowing() && dialog != null) {
             dialog.dismiss();
         }
     }

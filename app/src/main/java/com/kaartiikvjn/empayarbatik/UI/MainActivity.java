@@ -2,6 +2,7 @@ package com.kaartiikvjn.empayarbatik.UI;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -11,11 +12,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.SearchView;
+import androidx.core.view.GravityCompat;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.material.navigation.NavigationView;
 import com.kaartiikvjn.empayarbatik.R;
 import com.kaartiikvjn.empayarbatik.databinding.ActivityMainBinding;
 import com.kaartiikvjn.empayarbatik.utils.BaseActivity;
+import com.kaartiikvjn.empayarbatik.utils.Constants;
+
+import java.util.Objects;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
     private ActivityMainBinding binding;
@@ -26,7 +32,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.contentMain.mainToolbar.getRoot());
-        toolbarSetter(getSupportActionBar());
+        toolbarSetter(Objects.requireNonNull(getSupportActionBar()));
+        reAddFragment(new CategoryFragment(), Constants.newArrivals);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this,
                 binding.drawerLayout,
@@ -40,7 +47,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     private void toolbarSetter(ActionBar toolbar) {
-        toolbar.setTitle("Main activity");
+        toolbar.setTitle("New Arrivals");
     }
 
     @Override
@@ -67,21 +74,42 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.navDrawer_newArrivals) {
-            toast("New Arrivals clicked");
+            reAddFragment(new CategoryFragment(), Constants.newArrivals);
+            binding.drawerLayout.closeDrawer(GravityCompat.START);
+            Objects.requireNonNull(getSupportActionBar()).setTitle(item.getTitle());
             return true;
         } else if (id == R.id.navDrawer_collections) {
-            toast("Collections clicked");
+            reAddFragment(new CollectionsFragment(), "");
+            binding.drawerLayout.closeDrawer(GravityCompat.START);
+            Objects.requireNonNull(getSupportActionBar()).setTitle(item.getTitle());
             return true;
         } else if (id == R.id.navDrawer_top) {
-            toast("Top clicked");
+            reAddFragment(new CategoryFragment(), Constants.top);
+            binding.drawerLayout.closeDrawer(GravityCompat.START);
+            Objects.requireNonNull(getSupportActionBar()).setTitle(item.getTitle());
             return true;
         } else if (id == R.id.navDrawer_pants) {
-            toast("Pants clicked");
+            reAddFragment(new CategoryFragment(), Constants.pants);
+            binding.drawerLayout.closeDrawer(GravityCompat.START);
+            Objects.requireNonNull(getSupportActionBar()).setTitle(item.getTitle());
             return true;
         } else if (id == R.id.navDrawer_dress) {
-            toast("Dress clicked");
+            reAddFragment(new CategoryFragment(), Constants.dress);
+            binding.drawerLayout.closeDrawer(GravityCompat.START);
+            Objects.requireNonNull(getSupportActionBar()).setTitle(item.getTitle());
+            return true;
+        } else if (id == R.id.navDrawer_shoppingCart) {
+            binding.drawerLayout.closeDrawer(GravityCompat.START);
+            startActivity(new Intent(MainActivity.this, ShoppingCartActivity.class));
             return true;
         } else
             return false;
+    }
+
+    private void reAddFragment(Fragment fragment, String category) {
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.itemCategory, category);
+        fragment.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
     }
 }
