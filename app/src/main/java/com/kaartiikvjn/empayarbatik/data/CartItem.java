@@ -3,25 +3,25 @@ package com.kaartiikvjn.empayarbatik.data;
 public class CartItem {
     private String id;
 
-    public Float getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(Float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
     private String itemId;
     private String itemQuantity;
     private String itemTitle;
-    private Float price;
+    private Double price;
 
-    public CartItem(String id, String itemId, String itemQuantity, String itemTitle, Float price) {
+    public CartItem(String id, String itemId, String itemQuantity, String itemTitle, Double price) {
         this.id = id;
         this.itemId = itemId;
         this.itemQuantity = itemQuantity;
         this.itemTitle = itemTitle;
-        this.price = price;
+        this.price =  price;
     }
 
     public String getId() {

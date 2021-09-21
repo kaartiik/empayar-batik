@@ -60,6 +60,7 @@
                 android:text="To order any of below collections, please WhatsApp our sales."/>
 
             <TextView
+                android:id="@+id/whatsAppButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/w_bg"
@@ -67,6 +68,8 @@
                 android:layout_marginTop="20dp"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="10dp"
+                android:clickable="true"
+                android:focusable="true"
                 android:textColor="#FFA500"
                 />
 

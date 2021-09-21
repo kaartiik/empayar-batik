@@ -1,6 +1,7 @@
 package com.kaartiikvjn.empayarbatik.helper;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -38,7 +39,8 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
         Item current = items.get(position);
         holder.root.itemListTitle.setText(current.getItemTitle());
         holder.root.itemListPrice.setText("RM " + String.format("%.2f", current.getItemPrice()));
-        imageHelper.loadImage(current.getPhotoUrl(), holder.root.itemListImageView);
+        holder.root.itemListPrice.setPaintFlags(holder.root.itemListPrice.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        imageHelper.loadCloudImage(current.getPhotoUrl(), holder.root.itemListImageView);
         holder.itemView.setOnClickListener(v -> {
             fragment.onTileTapped(position);
         });

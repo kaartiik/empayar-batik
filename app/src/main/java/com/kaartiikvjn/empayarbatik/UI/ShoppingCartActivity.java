@@ -31,7 +31,7 @@ public class ShoppingCartActivity extends AppCompatActivity {
         toolbarSetter(Objects.requireNonNull(getSupportActionBar()));
         cartItems = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
-            cartItems.add(new CartItem(String.valueOf(i), String.valueOf(i), String.valueOf(i), getString(R.string.app_name), 10.00f));
+            cartItems.add(new CartItem(String.valueOf(i), String.valueOf(i), String.valueOf(i), getString(R.string.app_name), 10.00));
         }
         recyclerViewSetter();
         binding.proceed.setOnClickListener(v -> {

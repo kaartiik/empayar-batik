@@ -25,6 +25,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:textAlignment="center"
+                android:textStyle="italic"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorTextSecondary"
                 android:textSize="25sp"
@@ -50,6 +51,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorTextSecondary"
                 android:textSize="25sp"
+                android:textStyle="italic"
                 android:text="Senada Collection"/>
         </LinearLayout>
         <LinearLayout
@@ -72,6 +74,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorTextSecondary"
                 android:textSize="25sp"
+                android:textStyle="italic"
                 android:text="Tropicana Collection"/>
         </LinearLayout>
     </LinearLayout>

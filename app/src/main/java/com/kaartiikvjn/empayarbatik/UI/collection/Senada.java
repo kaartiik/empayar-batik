@@ -5,12 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.kaartiikvjn.empayarbatik.R;
+import com.kaartiikvjn.empayarbatik.databinding.ActivitySenadaBinding;
+import com.kaartiikvjn.empayarbatik.utils.BaseActivity;
 
-public class Senada extends AppCompatActivity {
-
+public class Senada extends BaseActivity {
+    private ActivitySenadaBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_senada);
+        binding = ActivitySenadaBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        binding.whatsAppButton.setOnClickListener(v -> toast("Clicked on it."));
     }
 }

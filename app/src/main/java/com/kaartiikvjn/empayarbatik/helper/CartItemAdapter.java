@@ -37,7 +37,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
         CartItem current = items.get(position);
         holder.binding.cartItemTitle.setText(current.getItemTitle());
         holder.binding.cartItemQuantity.setText(current.getItemQuantity());
-        holder.binding.cartItemPrice.setText("RM "+current.getPrice());
+        holder.binding.cartItemPrice.setText("RM "+String.format("%.2f",current.getPrice()));
 
     }
 

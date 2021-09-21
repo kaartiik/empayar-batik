@@ -23,7 +23,7 @@ import java.util.Objects;
 
 public class ItemDetails extends BaseActivity {
     private ActivityItemDetailsBinding binding;
-    ImageHelper imageHelper;
+    private ImageHelper imageHelper;
     private ArrayList<String> sizes;
     private static final String TAG = "ItemDetails";
 
@@ -40,7 +40,7 @@ public class ItemDetails extends BaseActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 hideProgressDialog();
                 binding.mainLayout.setVisibility(View.VISIBLE);
-                imageHelper.loadImage(Objects.requireNonNull(snapshot.child(Constants.itemPhotoUrl).getValue()).toString(), binding.itemDetailsPhoto);
+                imageHelper.loadCloudImage(Objects.requireNonNull(snapshot.child(Constants.itemPhotoUrl).getValue()).toString(), binding.itemDetailsPhoto);
                 binding.itemDetailsTitle.setText(Objects.requireNonNull(snapshot.child(Constants.itemTitle).getValue()).toString());
                 binding.itemDetailsPrice.setText("RM " + String.format("%.2f", Double.parseDouble(Objects.requireNonNull(snapshot.child(Constants.itemPrice).getValue()).toString())));
                 binding.itemDetailsMaterial.setText(Objects.requireNonNull(snapshot.child(Constants.itemMaterial).getValue()).toString());

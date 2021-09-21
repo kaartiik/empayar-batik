@@ -62,7 +62,7 @@ public class CategoryFragment extends BaseFragment {
                                 Objects.requireNonNull(item.child(Constants.itemMaterial).getValue()).toString(),
                                 Objects.requireNonNull(item.child(Constants.itemSpecialTraits).getValue()).toString(),
                                 (ArrayList<String>) item.child(Constants.itemSize).getValue(),
-                                (Double) item.child(Constants.itemPrice).getValue()
+                                Double.parseDouble(item.child(Constants.itemPrice).getValue().toString())
                         ));
                     }
                 }
