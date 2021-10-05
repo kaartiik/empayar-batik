@@ -44,9 +44,17 @@ public class CategoryFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        itemAdapter = new ItemListAdapter(items, this, requireContext());
+        itemAdapter = new ItemListAdapter(items, requireContext());
         binding.categoryRecyclerView.setLayoutManager(new GridLayoutManager(requireActivity(), 2));
         binding.categoryRecyclerView.setAdapter(itemAdapter);
+        itemAdapter.setOnItemTappedListener(new ItemListAdapter.OnItemTapped() {
+            @Override
+            public void onTap(int position) {
+                Intent intent = new Intent(requireActivity(), ItemDetails.class);
+                intent.putExtra("id", items.get(position).getItemId());
+                startActivity(intent);
+            }
+        });
         showProgressDialog("Loading " + category + " from database");
         getDatabaseReference().child(Constants.items).addValueEventListener(new ValueEventListener() {
             @Override
@@ -68,7 +76,7 @@ public class CategoryFragment extends BaseFragment {
                 }
                 if (items.isEmpty()) {
                     toast("No item found");
-                }else {
+                } else {
                     itemAdapter.notifyDataSetChanged();
                 }
             }
@@ -80,11 +88,5 @@ public class CategoryFragment extends BaseFragment {
 
             }
         });
-    }
-
-    public void onTileTapped(int pos) {
-        Intent intent = new Intent(requireActivity(), ItemDetails.class);
-        intent.putExtra("id",items.get(pos).getItemId());
-        startActivity(intent);
     }
 }

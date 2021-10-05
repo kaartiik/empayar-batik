@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.kaartiikvjn.empayarbatik.UI.CategoryFragment;
 import com.kaartiikvjn.empayarbatik.data.Item;
 import com.kaartiikvjn.empayarbatik.databinding.LayoutItemTileBinding;
 import com.kaartiikvjn.empayarbatik.utils.ImageHelper;
@@ -17,15 +16,22 @@ import java.util.ArrayList;
 
 public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemViewHolder> {
     private ArrayList<Item> items;
-    private CategoryFragment fragment;
     private Context context;
     private ImageHelper imageHelper;
+    private OnItemTapped onItemTapped;
 
-    public ItemListAdapter(ArrayList<Item> items, CategoryFragment fragment, Context context) {
+    public ItemListAdapter(ArrayList<Item> items, Context context) {
         this.items = items;
-        this.fragment = fragment;
         this.context = context;
         imageHelper = new ImageHelper(context);
+    }
+
+    public interface OnItemTapped {
+        void onTap(int position);
+    }
+
+    public void setOnItemTappedListener(OnItemTapped onItemTapped) {
+        this.onItemTapped = onItemTapped;
     }
 
     @NonNull
@@ -42,7 +48,7 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
         holder.root.itemListPrice.setPaintFlags(holder.root.itemListPrice.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         imageHelper.loadCloudImage(current.getPhotoUrl(), holder.root.itemListImageView);
         holder.itemView.setOnClickListener(v -> {
-            fragment.onTileTapped(position);
+            onItemTapped.onTap(position);
         });
     }
 
