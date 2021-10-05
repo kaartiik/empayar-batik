@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -63,24 +64,8 @@ public class SearchResultActivity extends BaseActivity {
                             (ArrayList<String>) item.child(Constants.itemSize).getValue(),
                             Double.parseDouble(Objects.requireNonNull(item.child(Constants.itemPrice).getValue()).toString())
                     ));
-                    if (Objects.requireNonNull(item.child(Constants.itemTitle).getValue()).toString().toLowerCase().contains(query.toLowerCase())) {
-                        tempItems.add(new Item(
-                                item.getKey(),
-                                Objects.requireNonNull(item.child(Constants.itemTitle).getValue()).toString(),
-                                Objects.requireNonNull(item.child(Constants.itemPhotoUrl).getValue()).toString(),
-                                Objects.requireNonNull(item.child(Constants.itemCategory).getValue()).toString(),
-                                Objects.requireNonNull(item.child(Constants.itemMaterial).getValue()).toString(),
-                                Objects.requireNonNull(item.child(Constants.itemSpecialTraits).getValue()).toString(),
-                                (ArrayList<String>) item.child(Constants.itemSize).getValue(),
-                                Double.parseDouble(Objects.requireNonNull(item.child(Constants.itemPrice).getValue()).toString())
-                        ));
-                    }
                 }
-                if (tempItems.isEmpty()) {
-                    binding.noItemMatchedYourSearch.setText(String.format("No item matched \"%s\"", query));
-                } else {
-                    itemAdapter.notifyDataSetChanged();
-                }
+               sortList(query);
             }
 
             @Override
@@ -98,10 +83,17 @@ public class SearchResultActivity extends BaseActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (count == 0) {
+                if (s.toString().trim().length()==0) {
                     tempItems.clear();
                     tempItems.addAll(items);
-                    itemAdapter.notifyDataSetChanged();
+                    if (tempItems.isEmpty()) {
+                        binding.noItemMatchedYourSearch.setVisibility(View.VISIBLE);
+                        binding.noItemMatchedYourSearch.setText(String.format("No item matched \"%s\"", s));
+                    } else {
+                        binding.noItemMatchedYourSearch.setVisibility(View.GONE);
+                        itemAdapter.notifyDataSetChanged();
+                    }
+
                 } else {
                     sortList(query = s.toString());
                 }
@@ -121,7 +113,13 @@ public class SearchResultActivity extends BaseActivity {
                 tempItems.add(item);
             }
         }
-        itemAdapter.notifyDataSetChanged();
+        if (tempItems.isEmpty()) {
+            binding.noItemMatchedYourSearch.setVisibility(View.VISIBLE);
+            binding.noItemMatchedYourSearch.setText(String.format("No item matched \"%s\"", s));
+        } else {
+            binding.noItemMatchedYourSearch.setVisibility(View.GONE);
+            itemAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
