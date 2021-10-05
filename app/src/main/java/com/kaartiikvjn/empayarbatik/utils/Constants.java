@@ -21,4 +21,10 @@ public class Constants {
     public static final String top = "Top";
     public static final String dress = "Dress";
     public static final String pants = "Pants";
+    public static final String cartItemId = "item_id";
+    public static final String cartItemTitle = "item_title";
+    public static final String cartItemQuantity = "item_quantity";
+    public static final String cartItemPrice = "item_price";
+    public static final String cartItemSize = "item_size";
+    public static final String coupons = "couponCodes";
 }

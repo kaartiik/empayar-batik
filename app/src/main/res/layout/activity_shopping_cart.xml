@@ -31,18 +31,19 @@
                 android:layout_marginTop="8dp"
 
                 android:nestedScrollingEnabled="true" />
+
             <EditText
+                android:id="@+id/coupon_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="8dp"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/coupon_bg"
-                android:paddingVertical="10dp"
                 android:gravity="center"
                 android:hint="Coupon Code"
-                android:layout_marginTop="8dp"
-                android:textColorHint="@color/colorCartDark"
+                android:paddingVertical="10dp"
                 android:textColor="@color/colorCartText"
-                />
+                android:textColorHint="@color/colorCartDark" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -56,88 +57,93 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="8dp"
-                android:orientation="horizontal"
                 android:layout_marginTop="20dp"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="8dp">
+
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorCartText"
+                    android:layout_weight="1"
                     android:text="Subtotal"
+                    android:textColor="@color/colorCartText"
                     android:textSize="22sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/textView_priceSubtotal"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="RM 0.00"
+                    android:textAlignment="center"
                     android:textColor="@color/colorCartText"
-                    android:text="RM 400.00"
-                    android:textSize="22sp"
-                    android:textAlignment="center"/>
+                    android:textSize="22sp" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="8dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:paddingHorizontal="8dp">
+
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorCartText"
+                    android:layout_weight="1"
                     android:text="Shipping Fee"
+                    android:textColor="@color/colorCartText"
                     android:textSize="22sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorCartText"
+                    android:layout_weight="1"
                     android:text="Free Shipping"
-                    android:textSize="22sp"
-                    android:textAlignment="center"/>
+                    android:textAlignment="center"
+                    android:textColor="@color/colorCartText"
+                    android:textSize="22sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="8dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:gravity="center_vertical">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorCartText"
-                    android:text="Total"
-                    android:textSize="22sp"
-                    android:textStyle="bold"/>
+                android:paddingHorizontal="8dp">
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Total"
                     android:textColor="@color/colorCartText"
-                    android:text="RM 400.00"
                     android:textSize="22sp"
-                    android:textAlignment="center"/>
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView_priceTotal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="RM 0.00"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorCartText"
+                    android:textSize="22sp" />
             </LinearLayout>
 
             <Button
                 android:id="@+id/proceed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="proceed to checkout"
-                android:backgroundTint="@color/colorCartLight"
-                android:textColor="@color/colorCartText"
-                android:layout_marginTop="30dp"
                 android:layout_gravity="center_horizontal"
-                />
+                android:layout_marginTop="30dp"
+                android:backgroundTint="@color/colorCartLight"
+                android:text="proceed to checkout"
+                android:textColor="@color/colorCartText" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

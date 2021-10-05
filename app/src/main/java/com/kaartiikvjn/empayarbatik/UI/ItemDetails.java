@@ -13,18 +13,21 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.kaartiikvjn.empayarbatik.R;
+import com.kaartiikvjn.empayarbatik.data.Item;
 import com.kaartiikvjn.empayarbatik.databinding.ActivityItemDetailsBinding;
 import com.kaartiikvjn.empayarbatik.utils.BaseActivity;
 import com.kaartiikvjn.empayarbatik.utils.Constants;
 import com.kaartiikvjn.empayarbatik.utils.ImageHelper;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
 
 public class ItemDetails extends BaseActivity {
     private ActivityItemDetailsBinding binding;
     private ImageHelper imageHelper;
     private ArrayList<String> sizes;
+    private Item item;
     private static final String TAG = "ItemDetails";
 
     @Override
@@ -46,6 +49,16 @@ public class ItemDetails extends BaseActivity {
                 binding.itemDetailsMaterial.setText(Objects.requireNonNull(snapshot.child(Constants.itemMaterial).getValue()).toString());
                 binding.itemDetailsSpecialTraits.setText(Objects.requireNonNull(snapshot.child(Constants.itemSpecialTraits).getValue()).toString());
                 sizes = (ArrayList<String>) snapshot.child(Constants.itemSize).getValue();
+                item = new Item(
+                        snapshot.getKey(),
+                        Objects.requireNonNull(snapshot.child(Constants.itemTitle).getValue()).toString(),
+                        Objects.requireNonNull(snapshot.child(Constants.itemPhotoUrl).getValue()).toString(),
+                        Objects.requireNonNull(snapshot.child(Constants.itemCategory).getValue()).toString(),
+                        Objects.requireNonNull(snapshot.child(Constants.itemMaterial).getValue()).toString(),
+                        Objects.requireNonNull(snapshot.child(Constants.itemSpecialTraits).getValue()).toString(),
+                        (ArrayList<String>) snapshot.child(Constants.itemSize).getValue(),
+                        Double.parseDouble(snapshot.child(Constants.itemPrice).getValue().toString())
+                );
                 setUpSizeSpinner(sizes);
             }
 
@@ -71,18 +84,36 @@ public class ItemDetails extends BaseActivity {
                 toast("Quantity can't be 0");
             }
         });
-        binding.itemDetailsAddToCart.setOnClickListener(v -> {
-            toast("Item added to cart");
+        binding.itemDetailsAddToCart.setOnClickListener(v -> addToCart());
+    }
+
+    private void addToCart() {
+        HashMap<String, Object> cartItem = new HashMap<>();
+        cartItem.put(Constants.cartItemId, item.getItemId());
+        cartItem.put(Constants.cartItemTitle, item.getItemTitle());
+        cartItem.put(Constants.cartItemPrice, item.getItemPrice());
+        cartItem.put(Constants.cartItemSize, Objects.requireNonNull(binding.sizeInputLayout.getEditText()).getText().toString());
+        cartItem.put(Constants.cartItemQuantity, binding.itemDetailsQuantity.getText());
+        String key = getDatabaseReference().child(Constants.shoppingCarts).child(Objects.requireNonNull(getAuth().getUid()))
+                .push().getKey();
+        showProgressDialog("Adding item to cart");
+        assert key != null;
+        getDatabaseReference().child(Constants.shoppingCarts).child(Objects.requireNonNull(getAuth().getUid()))
+                .child(key).setValue(cartItem).addOnSuccessListener(unused -> {
+            hideProgressDialog();
+            toast("Item added to cart successfully");
+        }).addOnFailureListener(e -> {
+            hideProgressDialog();
+            toast("Failed to add item to cart");
         });
     }
 
     private void setUpSizeSpinner(ArrayList<String> sizes) {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.list_item_layout, sizes);
-        ((AutoCompleteTextView) binding.sizeInputLayout.getEditText()).setAdapter(adapter);
+        ((AutoCompleteTextView) Objects.requireNonNull(binding.sizeInputLayout.getEditText())).setAdapter(adapter);
         binding.sizeInputLayout.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override

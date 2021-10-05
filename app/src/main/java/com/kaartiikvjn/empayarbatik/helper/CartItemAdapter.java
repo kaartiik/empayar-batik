@@ -2,20 +2,18 @@ package com.kaartiikvjn.empayarbatik.helper;
 
 import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.kaartiikvjn.empayarbatik.R;
 import com.kaartiikvjn.empayarbatik.UI.ShoppingCartActivity;
 import com.kaartiikvjn.empayarbatik.data.CartItem;
 import com.kaartiikvjn.empayarbatik.databinding.CartListLayoutBinding;
 
 import java.util.ArrayList;
 
-public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartItemViewHolder>{
+public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartItemViewHolder> {
     private final ArrayList<CartItem> items;
     private final ShoppingCartActivity activity;
 
@@ -27,7 +25,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
     @NonNull
     @Override
     public CartItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        CartListLayoutBinding binding = CartListLayoutBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false);
+        CartListLayoutBinding binding = CartListLayoutBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new CartItemViewHolder(binding);
     }
 
@@ -37,8 +35,16 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
         CartItem current = items.get(position);
         holder.binding.cartItemTitle.setText(current.getItemTitle());
         holder.binding.cartItemQuantity.setText(current.getItemQuantity());
-        holder.binding.cartItemPrice.setText("RM "+String.format("%.2f",current.getPrice()));
-
+        holder.binding.cartItemPrice.setText("RM " + String.format("%.2f", current.getPrice()));
+        holder.binding.cartRemoveButton.setOnClickListener(v -> {
+            activity.onRemoveItemTapped(position);
+        });
+        holder.binding.cartItemQuantityRemove.setOnClickListener(v -> {
+            activity.onDecQuantityTapped(position);
+        });
+        holder.binding.cartItemQuantityAdd.setOnClickListener(v -> {
+            activity.onIncreaseQuantityTapped(position);
+        });
     }
 
     @Override
@@ -46,8 +52,9 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
         return items.size();
     }
 
-    static class CartItemViewHolder extends RecyclerView.ViewHolder{
+    static class CartItemViewHolder extends RecyclerView.ViewHolder {
         CartListLayoutBinding binding;
+
         public CartItemViewHolder(@NonNull CartListLayoutBinding binding) {
             super(binding.getRoot());
             this.binding = binding;

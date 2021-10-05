@@ -1,7 +1,21 @@
 package com.kaartiikvjn.empayarbatik.data;
 
 public class CartItem {
-    private String id;
+    private String cartId;
+    private String itemId;
+    private String itemQuantity;
+    private String itemTitle;
+    private Double price;
+    private String size;
+
+    public CartItem(String cartId, String itemId, String itemQuantity, String itemTitle, Double price, String size) {
+        this.cartId = cartId;
+        this.itemId = itemId;
+        this.itemQuantity = itemQuantity;
+        this.itemTitle = itemTitle;
+        this.price =  price;
+        this.size = size;
+    }
 
     public double getPrice() {
         return price;
@@ -9,27 +23,14 @@ public class CartItem {
 
     public void setPrice(double price) {
         this.price = price;
+
+    }
+    public String getCartId() {
+        return cartId;
     }
 
-    private String itemId;
-    private String itemQuantity;
-    private String itemTitle;
-    private Double price;
-
-    public CartItem(String id, String itemId, String itemQuantity, String itemTitle, Double price) {
-        this.id = id;
-        this.itemId = itemId;
-        this.itemQuantity = itemQuantity;
-        this.itemTitle = itemTitle;
-        this.price =  price;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    public void setCartId(String cartId) {
+        this.cartId = cartId;
     }
 
     public String getItemId() {
@@ -54,5 +55,13 @@ public class CartItem {
 
     public void setItemTitle(String itemTitle) {
         this.itemTitle = itemTitle;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
     }
 }
