@@ -39,11 +39,10 @@ public class LoginActivity extends BaseActivity {
                     savePreferenceString(Constants.userEmail, binding.loginEmailEditText.getText().toString());
                     if (getPreferenceString(Constants.userEmail).equals(Constants.adminMail)){
                         startActivity(new Intent(LoginActivity.this, AddItem.class));
-                        finish();
                     }else{
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                        finish();
                     }
+                    finish();
                 }).addOnFailureListener(e -> {
                     hideProgressDialog();
                     if (e instanceof FirebaseAuthInvalidUserException){

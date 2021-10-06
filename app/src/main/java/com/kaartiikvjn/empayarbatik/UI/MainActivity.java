@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
@@ -98,6 +99,18 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         } else if (id == R.id.navDrawer_shoppingCart) {
             binding.drawerLayout.closeDrawer(GravityCompat.START);
             startActivity(new Intent(MainActivity.this, ShoppingCartActivity.class));
+            return true;
+        }  else if (id == R.id.navDrawer_logout) {
+            new AlertDialog.Builder(this)
+                    .setTitle("Logout!")
+                    .setMessage("Are you sure?")
+                    .setPositiveButton("Yes", (dialog, which) -> {
+                        getAuth().signOut();
+                        dialog.dismiss();
+                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                        finish();
+                    })
+                    .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss()).show();
             return true;
         } else
             return false;

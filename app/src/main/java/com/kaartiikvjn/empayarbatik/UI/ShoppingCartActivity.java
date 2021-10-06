@@ -15,8 +15,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.kaartiikvjn.empayarbatik.R;
 import com.kaartiikvjn.empayarbatik.data.CartItem;
+import com.kaartiikvjn.empayarbatik.data.Coupon;
 import com.kaartiikvjn.empayarbatik.databinding.ActivityShoppingCartBinding;
 import com.kaartiikvjn.empayarbatik.helper.CartItemAdapter;
 import com.kaartiikvjn.empayarbatik.utils.BaseActivity;
@@ -30,12 +32,11 @@ public class ShoppingCartActivity extends BaseActivity {
     private ActivityShoppingCartBinding binding;
     private ArrayList<CartItem> cartItems;
     private ArrayList<String> keys;
+    private ArrayList<Coupon> coupons;
     private CartItemAdapter cartItemAdapter;
     private ChildEventListener mListener;
     private double price;
-    private static final String FIVE_PER_CODE = "RT78YU";
-    private static final String TEN_PER_CODE = "SE78RT";
-    private static final String FIFTEEN_PER_CODE = "TYU908";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +47,28 @@ public class ShoppingCartActivity extends BaseActivity {
         toolbarSetter(Objects.requireNonNull(getSupportActionBar()));
         cartItems = new ArrayList<>();
         keys = new ArrayList<>();
+        coupons = new ArrayList<>();
         recyclerViewSetter();
+        showProgressDialog("Loading coupons");
+        getDatabaseReference().child(Constants.coupons).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                hideProgressDialog();
+                for (DataSnapshot coupon : snapshot.getChildren()) {
+                    coupons.add(new Coupon(
+                            coupon.getKey(),
+                            Objects.requireNonNull(coupon.child(Constants.couponTitle).getValue()).toString(),
+                            Double.parseDouble(Objects.requireNonNull(coupon.child(Constants.couponDiscount).getValue()).toString())
+                    ));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                hideProgressDialog();
+                toast("Failed to load coupon items");
+            }
+        });
         binding.couponEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -56,31 +78,21 @@ public class ShoppingCartActivity extends BaseActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.toString().length() == 6) {
-                    switch (s.toString())
-                    {
-                        case FIVE_PER_CODE:{
-                            double discount = price*0.05;
-                            price = price-discount;
+                    for (Coupon coupon : coupons) {
+                        if (coupon.getCouponTitle().equals(s.toString())) {
+
+                            double discount = price * coupon.getDiscountPercentage() / 100;
+                            price = price - discount;
                             setPrice(price);
-                        }
-                        break;
-                        case TEN_PER_CODE:{
-                            double discount = price*0.10;
-                            price = price-discount;
-                            setPrice(price);
-                        }
-                        break;
-                        case FIFTEEN_PER_CODE:{
-                            double discount = price*0.15;
-                            price = price-discount;
-                            setPrice(price);
-                        }
-                        break;
-                        default: {
-                            toast("Provided coupon code isn't valid");
+                        } else {
+                            if (coupons.indexOf(coupon) == coupons.size() - 1) {
+                                //REACHED END
+                                toast("Invalid coupon code");
+                            }
                         }
                     }
-                }
+                } else
+                    calculatePrice();
             }
 
             @Override
@@ -89,7 +101,10 @@ public class ShoppingCartActivity extends BaseActivity {
             }
         });
         binding.proceed.setOnClickListener(v -> {
+            saveCartItem(cartItems);
+            savePreferenceFloat(Constants.orderPrice, Float.valueOf(String.valueOf(price)));
             startActivity(new Intent(ShoppingCartActivity.this, PaymentPage.class));
+            finishAffinity();
         });
         mListener = new ChildEventListener() {
             @Override
@@ -159,8 +174,7 @@ public class ShoppingCartActivity extends BaseActivity {
         this.price = price;
     }
 
-    private void setPrice(double price)
-    {
+    private void setPrice(double price) {
         binding.textViewPriceSubtotal.setText(String.format("RM %.2f", price));
         binding.textViewPriceTotal.setText(String.format("RM %.2f", price));
     }

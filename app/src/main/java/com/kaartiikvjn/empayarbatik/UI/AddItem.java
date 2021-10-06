@@ -201,6 +201,9 @@ public class AddItem extends BaseActivity {
         } else if (item.getItemId() == R.id.add_item_clearForm) {
             clearForm();
             return true;
+        } else if (item.getItemId() == R.id.add_item_coupons) {
+            startActivity(new Intent(AddItem.this, CouponsActivity.class));
+            return true;
         } else
             return super.onOptionsItemSelected(item);
     }

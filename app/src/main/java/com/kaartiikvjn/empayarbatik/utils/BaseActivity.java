@@ -3,10 +3,7 @@ package com.kaartiikvjn.empayarbatik.utils;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.OpenableColumns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -22,9 +19,14 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.kaartiikvjn.empayarbatik.R;
+import com.kaartiikvjn.empayarbatik.data.CartItem;
 
+import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Locale;
 
 
@@ -36,6 +38,7 @@ public class BaseActivity extends AppCompatActivity {
     private CollectionReference usersReference;
     private DatabaseReference databaseReference;
     private StorageReference storageReference;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,12 +114,37 @@ public class BaseActivity extends AppCompatActivity {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
+
     public void longToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
+
     public FirebaseAuth getAuth() {
         return auth;
+    }
+
+
+    public void saveCartItem(ArrayList<CartItem> items) {
+        Gson gson = new Gson();
+        SharedPreferences.Editor editor = preferences.edit();
+        String json = gson.toJson(items);
+        editor.putString("items", json);
+        editor.apply();
+    }
+
+    public ArrayList<CartItem> getCartItems() {
+        ArrayList<CartItem> item;
+        Gson gson = new Gson();
+        String json = preferences.getString("items", null);
+        Type type = new TypeToken<ArrayList<CartItem>>() {
+        }.getType();
+
+        item = gson.fromJson(json, type);
+        if (item == null) {
+            return new ArrayList<>();
+        } else
+            return item;
     }
 
     public CollectionReference getUsersReference() {

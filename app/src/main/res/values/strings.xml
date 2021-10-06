@@ -26,5 +26,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search_hint">Search..</string>
+    <string name="coupons">Coupons</string>
+    <string name="enter_coupon_title">Enter coupon title</string>
+    <string name="enter_coupon_discount">Enter coupon discount in %</string>
+    <string name="enter_coupon_code">Enter coupon code</string>
     <!--===***===-->
 </resources>

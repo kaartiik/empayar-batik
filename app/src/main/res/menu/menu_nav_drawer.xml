@@ -21,6 +21,10 @@
                 android:id="@+id/navDrawer_shoppingCart"
                 android:icon="@drawable/ic_baseline_shopping_cart_24"
                 />
+            <item android:title ="@string/logout"
+                android:id="@+id/navDrawer_logout"
+                android:icon="@drawable/ic_baseline_exit_to_app_24"
+                />
         </menu>
     </item>
 

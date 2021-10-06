@@ -9,6 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EmpayarBatik">
+        <activity
+            android:name=".UI.CouponsActivity"
+            android:exported="true" />
+
         <meta-data
             android:name="android.app.default_searchable"
             android:value=".UI.SearchResultActivity" />

@@ -27,4 +27,10 @@ public class Constants {
     public static final String cartItemPrice = "item_price";
     public static final String cartItemSize = "item_size";
     public static final String coupons = "couponCodes";
+    public static final String couponTitle = "title";
+    public static final String couponDiscount = "discount";
+    public static final String orders = "orders";
+    public static final String orderCustomer = "o_customer";
+    public static final String orderItems = "o_items";
+    public static final String orderPrice = "o_price";
 }
