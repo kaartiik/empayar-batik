@@ -72,7 +72,7 @@ public class PaymentPage extends BaseActivity {
             return false;
         } else if (Objects.requireNonNull(binding.phoneNumberTextInputLayout.getEditText()).getText().toString().length()>=10 &&Objects.requireNonNull(binding.phoneNumberTextInputLayout.getEditText()).getText().toString().length()<=12 ){
             binding.phoneNumberTextInputLayout.getEditText().requestFocus();
-            binding.phoneNumberTextInputLayout.getEditText().setError("Please enter a 9 digit valid phone number");
+            binding.phoneNumberTextInputLayout.getEditText().setError("Please enter a 10-12 digit valid phone number");
             return false;
         } else if (Objects.requireNonNull(binding.cardNumberTextInputLayout.getEditText()).getText().toString().length() != 16) {
             binding.cardNumberTextInputLayout.getEditText().requestFocus();
