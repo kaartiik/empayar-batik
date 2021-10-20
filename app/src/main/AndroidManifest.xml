@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.kaartiikvjn.empayarbatik">
+    package="com.example.empayarbatik">
 
     <application
         android:allowBackup="true"
@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EmpayarBatik">
         <activity
-            android:name=".UI.CouponsActivity"
+            android:name="com.example.empayarbatik.UI.CouponsActivity"
             android:exported="true" />
 
         <meta-data
@@ -18,7 +18,7 @@
             android:value=".UI.SearchResultActivity" />
 
         <activity
-            android:name=".UI.SearchResultActivity"
+            android:name="com.example.empayarbatik.UI.SearchResultActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:windowSoftInputMode="stateHidden">
@@ -34,40 +34,40 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name=".UI.collection.Tropicana"
+            android:name="com.example.empayarbatik.UI.collection.Tropicana"
             android:exported="true" />
         <activity
-            android:name=".UI.collection.Senada"
+            android:name="com.example.empayarbatik.UI.collection.Senada"
             android:exported="true" />
         <activity
-            android:name=".UI.collection.CalmSea"
+            android:name="com.example.empayarbatik.UI.collection.CalmSea"
             android:exported="true" />
         <activity
-            android:name=".UI.ItemDetails"
+            android:name="com.example.empayarbatik.UI.ItemDetails"
             android:exported="true" />
         <activity
-            android:name=".UI.OrderCompleted"
+            android:name="com.example.empayarbatik.UI.OrderCompleted"
             android:exported="true" />
         <activity
-            android:name=".UI.PaymentBrandSelector"
+            android:name="com.example.empayarbatik.UI.PaymentBrandSelector"
             android:exported="true" />
         <activity
-            android:name=".UI.PaymentPage"
+            android:name="com.example.empayarbatik.UI.PaymentPage"
             android:exported="true" />
         <activity
-            android:name=".UI.ShoppingCartActivity"
+            android:name="com.example.empayarbatik.UI.ShoppingCartActivity"
             android:exported="true" />
         <activity
-            android:name=".UI.RegisterScreen"
+            android:name="com.example.empayarbatik.UI.RegisterScreen"
             android:exported="true" />
         <activity
-            android:name=".UI.AddItem"
+            android:name="com.example.empayarbatik.UI.AddItem"
             android:exported="true" />
         <activity
-            android:name=".UI.LoginActivity"
+            android:name="com.example.empayarbatik.UI.LoginActivity"
             android:exported="true" />
         <activity
-            android:name=".UI.SplashActivity"
+            android:name="com.example.empayarbatik.UI.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.EmpayarBatik.Fullscreen">
             <intent-filter>
@@ -77,7 +77,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".UI.MainActivity"
+            android:name="com.example.empayarbatik.UI.MainActivity"
             android:exported="true" />
     </application>
 

@@ -9,7 +9,7 @@ android {
     compileSdk 30
 
     defaultConfig {
-        applicationId "com.kaartiikvjn.empayarbatik"
+        applicationId "com.example.empayarbatik"
         minSdk 26
         targetSdk 30
         versionCode 1
