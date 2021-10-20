@@ -70,7 +70,7 @@ public class PaymentPage extends BaseActivity {
             binding.zipCodeTextInputLayout.getEditText().requestFocus();
             binding.zipCodeTextInputLayout.getEditText().setError("Please enter zip code");
             return false;
-        } else if (Objects.requireNonNull(binding.phoneNumberTextInputLayout.getEditText()).getText().toString().length()>=10 &&Objects.requireNonNull(binding.phoneNumberTextInputLayout.getEditText()).getText().toString().length()<=12 ){
+        } else if (Objects.requireNonNull(binding.phoneNumberTextInputLayout.getEditText()).getText().toString().length()<10 || Objects.requireNonNull(binding.phoneNumberTextInputLayout.getEditText()).getText().toString().length()>=12 ){
             binding.phoneNumberTextInputLayout.getEditText().requestFocus();
             binding.phoneNumberTextInputLayout.getEditText().setError("Please enter a 10-12 digit valid phone number");
             return false;
